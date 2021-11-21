@@ -1,0 +1,3 @@
+DROP DATABASE `oc_p5`;
+
+CREATE DATABASE `oc_p5`;
