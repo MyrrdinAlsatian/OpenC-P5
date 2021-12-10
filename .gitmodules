@@ -1,0 +1,3 @@
+[submodule "blog-html-maquette"]
+	path = blog-html-maquette
+	url = git@github.com:MyrrdinAlsatian/blog-html-maquette.git
