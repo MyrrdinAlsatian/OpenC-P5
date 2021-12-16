@@ -12,8 +12,8 @@
     "test": "phpunit",
     "server": "php -S localhost:8000 -d display_errors=1 -t public/",
     "d-autoload": "composer dump-autoload",
-    "lint": "php ./vendor/bin/phpcs",
-    "cs": "composer run test && composer run lint",
+    "pre-commit": "composer run test && composer run cs",
+    "cs": "php ./vendor/bin/phpcs",
     "cs:fix": "php ./vendor/bin/phpcbf"
   },
   "require-dev": {
