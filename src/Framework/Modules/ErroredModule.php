@@ -1,13 +1,15 @@
 <?php
+
 namespace Tests\CustomFramework\Modules;
 
 use CustomFramework\Router;
 
-class ErroredModule {
-    
+class ErroredModule
+{
     public function __construct(Router $router)
     {
-        $router-> get('/demo', function () { return new \stdClass();}, 'Error');
+        $router-> get('/demo', function () {
+            return new \stdClass();
+        }, 'Error');
     }
-
 }

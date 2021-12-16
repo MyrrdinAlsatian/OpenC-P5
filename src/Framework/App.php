@@ -62,10 +62,8 @@ class App
 
         if (is_string($response)) :
             return new Response(200, [], $response);
-
         elseif ($response instanceof ResponseInterface) :
             return $response;
-
         else :
             throw new \Exception('Response in not a string or an instance of responseInterface');
         endif;

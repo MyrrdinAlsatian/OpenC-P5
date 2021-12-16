@@ -2,10 +2,9 @@
 
 namespace CustomFramework\Router;
 
-
 /**
  * Class Route
- * 
+ *
  * Represent the route
  */
 class Route

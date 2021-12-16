@@ -10,5 +10,5 @@
     <file>src</file>
     <file>public/index.php</file>
 
-    <rule ref="PSR2"> </rule>
+    <rule ref="PSR12"> </rule>
 </ruleset>

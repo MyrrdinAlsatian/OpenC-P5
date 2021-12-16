@@ -12,18 +12,18 @@ class BlogModule
 
     public function __construct(Router $router)
     {
-        $router->get('/blog',[$this, 'index'], 'blog.index');
-        $router->get('/blog/{slug:[a-z0-9\-]+}-{id:\d+}',[$this, 'show'], 'blog.show');
+        $router->get('/blog', [$this, 'index'], 'blog.index');
+        $router->get('/blog/{slug:[a-z0-9\-]+}-{id:\d+}', [$this, 'show'], 'blog.show');
     }
 
     public function index(ServerRequestInterface $request): string
     {
             return '<h1>Bienvenue sur le blog</h1>';
     }
-    
-    
+
+
     public function show(ServerRequestInterface $request): string
     {
-            return '<h1>Bienvenue sur l\'article'. $request->getAttribute('slug').'</h1>';
+            return '<h1>Bienvenue sur l\'article' . $request->getAttribute('slug') . '</h1>';
     }
 }
