@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\JBSBlog;
+namespace Tests\CustomFramework;
 
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Psr7\ServerRequest;
 // use GuzzleHttp\Psr7\ResponseInterface;
-use JBSBlog\App;
+use CustomFramework\App;
 
 class AppTest extends TestCase
 {

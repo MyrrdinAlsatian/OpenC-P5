@@ -1,5 +1,6 @@
 <?php
-namespace JBSBlog;
+
+namespace CustomFramework;
 
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -7,6 +8,20 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class App
 {
+    /**
+     * app constructor function
+     *
+     * @param string[] $modules list des modules
+     */
+    public function __construct(array $modules = [])
+    {
+        $router = new Router();
+        foreach ($modules as $module) :
+            $this->modules[] = new $modules($router);
+        endforeach;
+    }
+
+
     public function run(ServerRequestInterface $request): ResponseInterface
     {
         $uri = $request->getUri()->getPath();
