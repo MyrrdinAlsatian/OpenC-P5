@@ -4,7 +4,8 @@
   "autoload": {
     "psr-4": {
       "CustomFramework\\": "src/Framework",
-      "App\\": "src"
+      "App\\": "src",
+      "Tests\\": "tests"
     }
   },
   "scripts": {
@@ -12,7 +13,8 @@
     "server": "php -S localhost:8000 -d display_errors=1 -t public/",
     "d-autoload": "composer dump-autoload",
     "lint": "php ./vendor/bin/phpcs",
-    "check": "composer run test && composer run lint"
+    "cs": "composer run test && composer run lint",
+    "cs:fix": "php ./vendor/bin/phpcbf"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
