@@ -24,6 +24,6 @@ class BlogModule
 
     public function show(ServerRequestInterface $request): string
     {
-            return '<h1>Bienvenue sur l\'article' . $request->getAttribute('slug') . '</h1>';
+            return '<h1>Bienvenue sur l\'article ' . $request->getAttribute('slug') . '</h1>';
     }
 }

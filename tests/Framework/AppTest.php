@@ -33,13 +33,14 @@ class AppTest extends TestCase
         ]);
 
         $request = new ServerRequest("GET", '/blog');
-        $requestArticle = new ServerRequest("GET", '/blog/mon-article-8');
-
         $response = $app->run($request);
-        $responseArticle = $app->run($requestArticle);
-        $this->assertContains('<h1>Bienvenue sur le blog</h1>', (array)$response->getBody());
-        $this->assertContains('<h1>Bienvenue sur l\'article</h1>', (array)$responseArticle->getBody());
+        $this->assertEquals('<h1>Bienvenue sur le blog</h1>', (string)$response->getBody());
         $this->assertEquals(200, $response->getStatusCode());
+        
+        $requestArticle = new ServerRequest("GET", '/blog/mon-article-8');
+        $responseArticle = $app->run($requestArticle);
+        $this->assertEquals('<h1>Bienvenue sur l\'article mon-article</h1>', (string)$responseArticle->getBody());
+        $this->assertEquals(200, $responseArticle->getStatusCode());
     }
 
 
