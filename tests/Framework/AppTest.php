@@ -4,9 +4,11 @@ namespace Tests\CustomFramework;
 
 use App\Blog\BlogModule;
 use CustomFramework\App;
+use CustomFramework\Renderer;
 use PHPUnit\Framework\TestCase;
-// use GuzzleHttp\Psr7\ResponseInterface;
 use GuzzleHttp\Psr7\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Tests\CustomFramework\Modules\StringModule;
 use Tests\CustomFramework\Modules\ErroredModule;
 
 class AppTest extends TestCase
@@ -28,15 +30,21 @@ class AppTest extends TestCase
 
     public function testblog()
     {
+
+        $renderer = new Renderer();
+        $renderer->addPath(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Views");
+
         $app = new App([
             BlogModule::class
+        ], [
+            'renderer' => $renderer
         ]);
 
         $request = new ServerRequest("GET", '/blog');
         $response = $app->run($request);
-        $this->assertEquals('<h1>Bienvenue sur le blog</h1>', (string)$response->getBody());
+        $this->assertEquals('<h1>Hello le index</h1>', (string)$response->getBody());
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $requestArticle = new ServerRequest("GET", '/blog/mon-article-8');
         $responseArticle = $app->run($requestArticle);
         $this->assertEquals('<h1>Bienvenue sur l\'article mon-article</h1>', (string)$responseArticle->getBody());
@@ -46,7 +54,7 @@ class AppTest extends TestCase
 
     public function test404()
     {
-        
+
         $app = new App();
 
         $request = new ServerRequest("GET", '/ezate');
@@ -67,5 +75,15 @@ class AppTest extends TestCase
 
         $this->expectException(\Exception::class);
         $app->run($request);
+    }
+    public function testConvertStringToResponse()
+    {
+        $app = new App([
+            StringModule::class
+        ]);
+        $request = new ServerRequest('GET', '/demo');
+        $response = $app->run($request);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertEquals('DEMO', (string)$response->getBody());
     }
 }

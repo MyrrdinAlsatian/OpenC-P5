@@ -6,7 +6,17 @@ class Renderer
 {
     const DEFAULT_NAMESPACE = '__MAIN';
     private $paths = [];
+    /**
+     * Variables globalement accessibles pour toutes les vues
+     * @var array
+     */
+    private $globals = [];
 
+    /**
+     * Permet de rajouter un chamin pour charger les vues
+     * @param string $namespace
+     * @param null|string $path
+     */
     public function addPath(string $namespace, ?string $path = null): void
     {
         if (is_null($path)) :
@@ -25,7 +35,7 @@ class Renderer
      * @param array $params
      * @return string
      */
-    public function render(string $view): string
+    public function render(string $view, array $params = []): string
     {
         if ($this->hasNamespace($view)) :
             $path = $this->replaceNamespace($view) . '.php';
@@ -34,8 +44,22 @@ class Renderer
         endif;
 
         ob_start();
+        $renderer = $this;
+        extract($this->globals);
+        extract($params);
         require($path);
         return ob_get_clean();
+    }
+
+    /**
+     * Permet de rajouter des variables globales à toutes les vues
+     *
+     * @param string $key
+     * @param mixed $value
+     */
+    public function addGlobal(string $key, $value): void
+    {
+        $this->globals[$key] = $value;
     }
 
     private function hasNamespace(string $view): bool

@@ -28,4 +28,16 @@ class RendererTest extends TestCase
         $content = $this->renderer->render('demo');
         $this->assertEquals('toto', $content);
     }
+    public function testRenderWithParams()
+    {
+        $content = $this->renderer->render('demoparams', ['nom'=> 'Marc']);
+        $this->assertEquals('toto Marc', $content);
+    }
+
+    public function testRenderGlobalParams()
+    {   
+        $this->renderer->addGlobal('nom', 'Marc');
+        $content = $this->renderer->render('demoparams');
+        $this->assertEquals('toto Marc', $content);
+    }
 }
